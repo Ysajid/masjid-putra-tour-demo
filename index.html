@@ -12,6 +12,7 @@
   --bg:#FBF6F6; --surface:#FFFFFF; --ink:#2E1F2A; --muted:#6E5C67;
   --rose:#B76E79; --rose-soft:#F1DCDF; --lake:#2C6A6E; --lake-ink:#FFFFFF;
   --gold:#9C7A40; --line:#EAD9DC; --sky:#E3EDED; --stone:#EBD3D1; --marble:#FFFFFF;
+  --gold-ink:#7A5E2C; --rose-strong:#9A4F5B;
   --scan-bg:#120D10; --scan-ink:#F7EEF0;
   color-scheme:light;
   box-sizing:border-box;
@@ -22,13 +23,13 @@
   :root:not([data-theme="light"]){
     --bg:#1B1318; --surface:#251B21; --ink:#F4E9EC; --muted:#BBA6B1;
     --rose:#D79AA3; --rose-soft:#3B2A32; --lake:#78B9BC; --lake-ink:#0F2526;
-    --gold:#D4B47C; --line:#3A2C33; --sky:#1E2A2B; --stone:#4A353C; --marble:#3A2D33; color-scheme:dark;
+    --gold:#D4B47C; --line:#3A2C33; --sky:#1E2A2B; --stone:#4A353C; --marble:#3A2D33; --gold-ink:#D4B47C; --rose-strong:#D79AA3; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#1B1318; --surface:#251B21; --ink:#F4E9EC; --muted:#BBA6B1;
   --rose:#D79AA3; --rose-soft:#3B2A32; --lake:#78B9BC; --lake-ink:#0F2526;
-  --gold:#D4B47C; --line:#3A2C33; --sky:#1E2A2B; --stone:#4A353C; --marble:#3A2D33; color-scheme:dark;
+  --gold:#D4B47C; --line:#3A2C33; --sky:#1E2A2B; --stone:#4A353C; --marble:#3A2D33; --gold-ink:#D4B47C; --rose-strong:#D79AA3; color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
@@ -67,7 +68,7 @@ main{max-width:540px;margin:0 auto;padding:20px 20px 48px}
 .lang{min-height:40px;padding:0 14px;border-radius:20px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-size:16px}
 .lang[aria-pressed="true"]{border-color:var(--lake);background:var(--lake);color:var(--lake-ink);font-weight:700}
 .note{font-size:15px;color:var(--muted);text-align:center;margin-top:18px}
-.badge{display:block;width:max-content;max-width:100%;margin:28px auto 0;font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:20px;padding:3px 12px}
+.badge{display:block;width:max-content;max-width:100%;margin:28px auto 0;font-size:13px;color:var(--gold-ink);border:1px solid var(--gold-ink);border-radius:20px;padding:3px 12px}
 .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:22px 0 0}
 .strip svg{border-radius:12px}
 
@@ -82,7 +83,7 @@ main{max-width:540px;margin:0 auto;padding:20px 20px 48px}
 .plan .lbl{font-size:12px;fill:var(--muted);font-family:"Alegreya Sans",sans-serif}
 .plan .path{fill:none;stroke:var(--lake);stroke-width:3;stroke-dasharray:2 7;stroke-linecap:round;stroke-linejoin:round}
 .plan .stop{fill:var(--surface);stroke:var(--rose);stroke-width:2.5}
-.plan .stop.v{fill:var(--rose);stroke:var(--rose)}
+.plan .stop.v{fill:var(--rose-strong);stroke:var(--rose-strong)}
 .plan .stop.cur{fill:var(--lake);stroke:var(--lake)}
 .plan .sn{font-family:"Alegreya",serif;font-weight:700;font-size:14px;fill:var(--ink);text-anchor:middle;dominant-baseline:central;pointer-events:none}
 .plan .sn.on{fill:var(--bg)}
@@ -95,7 +96,7 @@ main{max-width:540px;margin:0 auto;padding:20px 20px 48px}
 .list .t{flex:1;min-width:0}
 .list .t b{display:block;font-weight:700}
 .list .t span{display:block;font-size:15px;color:var(--muted)}
-.list .chk{color:var(--rose);font-size:14px}
+.list .chk{color:var(--rose-strong);font-size:14px}
 
 /* Station */
 .st-meta{margin:16px 0 0;font-size:15px;color:var(--muted)}
@@ -117,11 +118,11 @@ h2.sec{font-size:22px;margin:34px 0 12px}
 .adhan div{padding:12px 0;border-bottom:1px solid var(--line)}
 .adhan .tr{font-family:"Alegreya",serif;font-size:19px;font-style:italic}
 .adhan .en{display:block;color:var(--muted);font-size:16px}
-.adhan .x{float:right;font-size:13px;color:var(--gold);margin-top:4px}
+.adhan .x{float:right;font-size:13px;color:var(--gold-ink);margin-top:4px}
 
 .src{background:var(--surface);border-radius:4px 18px 18px 18px;padding:16px 18px;border-left:4px solid var(--rose);margin-top:14px}
 .src .en{font-family:"Alegreya",Georgia,serif;font-size:20px;line-height:1.45;margin:0}
-.src .ref{font-size:14px;color:var(--gold);margin:8px 0 0;font-weight:500}
+.src .ref{font-size:14px;color:var(--gold-ink);margin:8px 0 0;font-weight:500}
 .src .ctx{font-size:15px;color:var(--muted);margin:6px 0 0}
 
 .morelink{display:flex;align-items:center;gap:12px;margin-top:28px;padding:16px 18px;border-radius:16px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none}
@@ -163,8 +164,8 @@ textarea{width:100%;min-height:110px;border-radius:14px;border:1.5px solid var(-
 .finish h1{font-size:36px;text-align:center;margin-top:22px}
 .finish .lede{text-align:center;color:var(--muted);margin:10px auto 0;max-width:34ch}
 .rate{display:flex;gap:8px;justify-content:center;margin:12px 0}
-.rate button{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-size:18px}
-.rate button[aria-pressed="true"]{background:var(--rose);border-color:var(--rose);color:var(--bg)}
+.rate button{color:var(--ink);width:48px;height:48px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-size:18px}
+.rate button[aria-pressed="true"]{background:var(--rose-strong);border-color:var(--rose-strong);color:var(--bg)}
 .q{text-align:center;font-weight:700;margin-top:26px}
 .choice{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
 
@@ -174,6 +175,18 @@ textarea{width:100%;min-height:110px;border-radius:14px;border:1.5px solid var(-
 .frame{position:relative;width:230px;height:230px;border-radius:22px;border:3px solid var(--scan-ink);overflow:hidden}
 .frame::after{content:"";position:absolute;left:8%;right:8%;height:3px;background:var(--rose);top:10%;animation:sweep 1.3s ease-in-out infinite alternate}
 @keyframes sweep{to{top:88%}}
+.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.scan.live .frame video{display:block}
+.frame::after{z-index:1}
+
+/* Station plaques (staff print view) */
+.plaques .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.plaque{background:#fff;color:#111;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;break-inside:avoid}
+.plaque svg{display:block;width:100%;height:auto;max-width:220px;margin:0 auto}
+.plaque b{display:block;font-family:"Alegreya",serif;font-size:18px;margin-top:6px}
+.plaque span{display:block;font-size:13px;color:#444;word-break:break-all}
+.stafflink{display:block;text-align:center;font-size:14px;color:var(--muted);margin-top:14px}
+@media print{.bar,.noprint,#toast{display:none!important}body{background:#fff}main{max-width:none;padding:0}.plaques .grid{grid-template-columns:repeat(2,1fr)}}
 .scan p{margin:0;text-align:center;max-width:28ch}
 .scan small{opacity:.7;font-size:14px}
 .scan .btn.ghost{color:var(--scan-ink);border-color:var(--scan-ink);width:auto}
@@ -196,9 +209,9 @@ textarea{width:100%;min-height:110px;border-radius:14px;border:1.5px solid var(-
 <main id="app"></main>
 
 <div class="scan" id="scan" hidden role="dialog" aria-modal="true" aria-label="Scan station code">
-  <div class="frame" aria-hidden="true"></div>
-  <p>Point your camera at the QR code on the station plaque</p>
-  <small>Prototype: opens your next station automatically</small>
+  <div class="frame" aria-hidden="true"><video id="scanVideo" playsinline muted></video></div>
+  <p id="scanMsg">Point your camera at the QR code on the station plaque</p>
+  <small id="scanHint" aria-live="polite">Starting camera…</small>
   <button class="btn ghost" id="scanCancel">Cancel</button>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -561,6 +574,7 @@ function vWelcome(){
     <a class="btn" href="#tour">Start the tour</a>
     <p class="note">Robes and headscarves are free to borrow at the entrance.</p>
     <span class="badge">Prototype. Content pending scholar review</span>
+    <a class="stafflink" href="#plaques">Staff: print station QR plaques</a>
   </section>`;
   app.querySelectorAll(".lang").forEach(b=>b.onclick=()=>{if(b.dataset.l!=="en")toast(`${b.textContent} narration arrives in the pilot. Showing English for now.`)});
 }
@@ -657,7 +671,7 @@ function vFinish(){
     <p class="q">How was your visit?</p>
     <div class="rate" role="group" aria-label="Rating out of 5">${[1,2,3,4,5].map(n=>`<button data-r="${n}" aria-pressed="${fb.r===n}" aria-label="${n} out of 5">${n}</button>`).join("")}</div>
     <p class="q">Did you learn something new about Islam?</p>
-    <div class="choice" role="group">${["Yes, a lot","A little","Not really"].map(c=>`<button class="lang" data-c="${c}" aria-pressed="${fb.c===c}">${c}</button>`).join("")}</div>
+    <div class="choice" role="group" aria-label="Did you learn something new about Islam?">${["Yes, a lot","A little","Not really"].map(c=>`<button class="lang" data-c="${c}" aria-pressed="${fb.c===c}">${c}</button>`).join("")}</div>
     <div class="stack" style="margin-top:28px">
       <a class="btn ghost" href="#questions">Ask a guide a question</a>
       <button class="btn ghost" id="restart">Start again</button>
@@ -668,14 +682,121 @@ function vFinish(){
   $("#restart").onclick=()=>{visited=new Set();save("mt-visited",[]);location.hash="tour"};
 }
 
-/* ---------- Scan (simulated) ---------- */
-let scanTimer;
-function openScan(id){const sc=$("#scan");sc.hidden=false;$("#scanCancel").focus();scanTimer=setTimeout(()=>{sc.hidden=true;location.hash=id},1600)}
-$("#scanCancel").onclick=()=>{clearTimeout(scanTimer);$("#scan").hidden=true};
+/* ---------- Scan: live camera where possible, simulated otherwise ---------- */
+const JSQR_SRC="vendor/jsQR-1.4.0.js", QRGEN_SRC="vendor/qrcode-generator-1.4.4.js";
+const scanEl=$("#scan"), scanVideo=$("#scanVideo"), scanMsg=$("#scanMsg"), scanHint=$("#scanHint");
+let scanTimer=0, scanRaf=0, scanStream=null, scanSession=0, scanReturnFocus=null;
+const scripts={};
+function loadScript(src){return scripts[src]||(scripts[src]=new Promise((ok,no)=>{const e=document.createElement("script");e.src=src;e.onload=ok;e.onerror=()=>{delete scripts[src];no(new Error("load "+src))};document.head.appendChild(e)}))}
+
+/* A plaque's QR holds this page's URL plus #stationId; a bare station id also works. */
+function stationFromCode(text){
+  const t=String(text||"").trim();
+  const key=(t.includes("#")?t.slice(t.lastIndexOf("#")+1):t.split(/[\/:?=&]/).pop()).toLowerCase();
+  return STATIONS.find(s=>s.id===key)||null;
+}
+function stationUrl(id){return location.origin+location.pathname+"#"+id}
+
+async function makeDecoder(){
+  if("BarcodeDetector" in window){
+    try{const f=await BarcodeDetector.getSupportedFormats();
+      if(f.includes("qr_code")){const d=new BarcodeDetector({formats:["qr_code"]});return async v=>{const r=await d.detect(v);return r.length?r[0].rawValue:null}}}catch(e){}
+  }
+  await loadScript(JSQR_SRC);
+  const c=document.createElement("canvas"), x=c.getContext("2d",{willReadFrequently:true});
+  return async v=>{
+    const w=v.videoWidth,h=v.videoHeight;if(!w||!h)return null;
+    const k=Math.min(1,720/Math.max(w,h));c.width=Math.round(w*k);c.height=Math.round(h*k);
+    x.drawImage(v,0,0,c.width,c.height);
+    const r=jsQR(x.getImageData(0,0,c.width,c.height).data,c.width,c.height,{inversionAttempts:"attemptBoth"});
+    return r?r.data:null;
+  };
+}
+
+function stopCamera(){
+  cancelAnimationFrame(scanRaf);scanRaf=0;
+  if(scanStream){scanStream.getTracks().forEach(t=>t.stop());scanStream=null}
+  scanVideo.srcObject=null;scanEl.classList.remove("live");
+}
+function closeScan(){
+  scanSession++;clearTimeout(scanTimer);stopCamera();
+  if(scanEl.hidden)return;
+  scanEl.hidden=true;
+  if(scanReturnFocus&&document.contains(scanReturnFocus))scanReturnFocus.focus();
+  scanReturnFocus=null;
+}
+function goTo(id){closeScan();location.hash=id}
+function simulate(id,why){
+  stopCamera();
+  scanMsg.textContent=why;
+  scanHint.textContent="Opening your next station…";
+  const my=scanSession;scanTimer=setTimeout(()=>{if(my===scanSession)goTo(id)},2200);
+}
+
+async function openScan(nextId){
+  scanReturnFocus=document.activeElement;
+  const my=++scanSession;
+  scanEl.hidden=false;$("#scanCancel").focus();
+  scanMsg.textContent="Point your camera at the QR code on the station plaque";
+  scanHint.textContent="Starting camera…";
+  if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    simulate(nextId,"The camera isn’t available on this page.");return;
+  }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"}},audio:false});
+    if(my!==scanSession){stream.getTracks().forEach(t=>t.stop());return}
+    scanStream=stream;scanVideo.srcObject=stream;await scanVideo.play();
+    const decode=await makeDecoder();
+    if(my!==scanSession)return;
+    scanEl.classList.add("live");
+    scanHint.textContent="Hold the code inside the frame.";
+    let busy=false;
+    const tick=async()=>{
+      if(my!==scanSession)return;
+      if(!busy&&scanVideo.readyState>=2){
+        busy=true;
+        try{const txt=await decode(scanVideo);
+          if(txt&&my===scanSession){const st=stationFromCode(txt);
+            if(st){goTo(st.id);return}
+            scanHint.textContent="That code isn’t one of this tour’s stations.";}
+        }catch(e){}
+        busy=false;
+      }
+      scanRaf=requestAnimationFrame(tick);
+    };
+    tick();
+  }catch(e){
+    if(my!==scanSession)return;
+    simulate(nextId,e&&e.name==="NotAllowedError"?"Camera access was declined.":"The camera couldn’t start.");
+  }
+}
+$("#scanCancel").onclick=closeScan;
+document.addEventListener("keydown",e=>{
+  if(scanEl.hidden)return;
+  if(e.key==="Escape"){e.preventDefault();closeScan()}
+  else if(e.key==="Tab"){e.preventDefault();$("#scanCancel").focus()} /* only one control: keep focus in the dialog */
+});
+
+/* ---------- Station plaques (staff) ---------- */
+function vPlaques(){
+  setBack("#","Back to welcome");
+  app.innerHTML=`<section class="plaques">
+    <h1 class="st-title">Station QR plaques</h1>
+    <p class="sub noprint">Print this page and fix each code at its station. Visitors can scan with the tour’s scan button or their phone’s own camera; both open the right station. The codes point to <b>${location.origin+location.pathname}</b>, so print from the address you’ll publish.</p>
+    <button class="btn noprint" id="printBtn" style="margin-top:16px">Print plaques</button>
+    <div class="grid" id="plaqueGrid"><p>Making codes…</p></div>
+  </section>`;
+  $("#printBtn").onclick=()=>window.print();
+  loadScript(QRGEN_SRC).then(()=>{
+    const g=$("#plaqueGrid");if(!g)return;
+    g.innerHTML=STATIONS.map((st,i)=>{const q=qrcode(0,"M");q.addData(stationUrl(st.id));q.make();
+      return `<div class="plaque">${q.createSvgTag({cellSize:6,margin:2,alt:"QR code for station "+(i+1)})}<b>${i+1}. ${st.title}</b><span>${st.place}</span></div>`}).join("");
+  }).catch(()=>{const g=$("#plaqueGrid");if(g)g.innerHTML="<p>Couldn’t load the QR generator. Check your connection and reload.</p>"});
+}
 
 /* ---------- Router ---------- */
 function route(){
-  stopAudio();
+  stopAudio();closeScan();
   const h=location.hash.replace("#","");
   const idx=STATIONS.findIndex(s=>s.id===h);
   const mIdx=h.startsWith("more-")?STATIONS.findIndex(s=>"more-"+s.id===h):-1;
@@ -684,11 +805,17 @@ function route(){
   else if(h==="tour")vTour();
   else if(h==="questions")vQuestions();
   else if(h==="finish")vFinish();
+  else if(h==="plaques")vPlaques();
   else vWelcome();
   window.scrollTo(0,0);
+  /* Tell screen readers the view changed: move focus to the new heading */
+  if(routed){const h1=app.querySelector("h1");if(h1){h1.tabIndex=-1;h1.style.outline="none";h1.focus({preventScroll:true})}}
+  routed=true;
 }
+let routed=false;
 $("#barName").textContent=MOSQUE.name;
 window.addEventListener("hashchange",route);
+window.addEventListener("pagehide",()=>{stopAudio();closeScan()});
 route();
 </script>
 </body>
