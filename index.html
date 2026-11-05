@@ -143,6 +143,17 @@ details.where .plan{margin-top:0}
 .stepper .btn{flex:1}
 .stepper .btn.ghost{flex:0 0 auto;width:auto}
 
+/* Qibla finder (optional, mihrab station) */
+.qibla{margin-top:16px;padding:16px 18px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface)}
+.qibla b{display:block;font-family:"Alegreya",serif;font-size:18px}
+.qibla p{margin:4px 0 12px;font-size:15px;color:var(--muted)}
+.qibla .dial{position:relative;width:200px;height:200px;margin:8px auto 4px}
+.qibla .dial svg{position:absolute;inset:0;width:100%;height:100%}
+.qibla #qArrow{transition:transform .15s linear;transform-origin:50% 50%}
+.qibla .read{text-align:center;font-weight:700;margin:6px 0 0;color:var(--ink)}
+.qibla[data-on="false"] .live{display:none}
+.qibla[data-on="true"] .start{display:none}
+
 /* Know more */
 .more .refs{padding-left:20px;margin:8px 0 0}
 .more .refs li{margin:6px 0;color:var(--muted)}
@@ -606,6 +617,7 @@ function vStation(i){
   const prev=STATIONS[i-1], next=STATIONS[i+1];
   let extra="";
   if(st.steps) extra=`<ol class="steps" aria-label="Order of washing">${st.steps.map((s,k)=>`<li><i>${k+1}</i>${s}</li>`).join("")}</ol>`;
+  if(st.id==="mihrab") extra=`<div id="qiblaSlot"></div>`;
   if(st.adhan) extra=`<h2 class="sec">The words of the adhan</h2><div class="adhan">${st.adhan.map(([tr,en,x])=>`<div><span class="x">${x}</span><span class="tr">${tr}</span><span class="en">${en}</span></div>`).join("")}</div>`;
   app.innerHTML=`<article>
     ${ILL[st.id]()}
@@ -624,6 +636,7 @@ function vStation(i){
     </nav>
   </article>`;
   const lb=$(".listen");lb.onclick=()=>toggleAudio(st,lb);
+  if(st.id==="mihrab"&&qiblaSupported())mountQibla();
 }
 
 function vMore(i){
@@ -794,9 +807,65 @@ function vPlaques(){
   }).catch(()=>{const g=$("#plaqueGrid");if(g)g.innerHTML="<p>Couldn’t load the QR generator. Check your connection and reload.</p>"});
 }
 
+/* ---------- Qibla finder: opt-in, compass only, no camera ---------- */
+const QIBLA=292.6; /* Masjid Putra (2.936N 101.690E) to the Kaaba, degrees from true north */
+let qiblaOff=null;
+function qiblaSupported(){
+  return "DeviceOrientationEvent" in window && matchMedia("(pointer:coarse)").matches;
+}
+function mountQibla(){
+  const slot=$("#qiblaSlot");if(!slot)return;
+  slot.innerHTML=`<section class="qibla" data-on="false" aria-labelledby="qT">
+    <b id="qT">Optional: find the qibla yourself</b>
+    <div class="start"><p>Your phone’s compass can point toward Mecca. It uses motion sensors only, not the camera.</p>
+      <button class="btn ghost" id="qStart">Try the qibla finder</button></div>
+    <div class="live">
+      <div class="dial" aria-hidden="true">
+        <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="92" fill="var(--bg)" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="100" cy="100" r="74" fill="none" stroke="var(--rose-soft)" stroke-width="2" stroke-dasharray="3 6"/></svg>
+        <svg viewBox="0 0 200 200" id="qArrow"><path d="M100 18 L122 70 H108 V140 H92 V70 H78 Z" fill="var(--lake)"/>
+          <rect x="88" y="4" width="24" height="18" rx="2" fill="var(--ink)"/><rect x="88" y="9" width="24" height="3" fill="var(--gold)"/></svg>
+      </div>
+      <p class="read" id="qRead" aria-live="polite">Hold your phone flat…</p>
+      <p>Hold the phone flat, top edge away from you, and turn until the arrow points straight ahead. If it seems off, move the phone in a figure-8 to calibrate. The mihrab in front of you is the true direction.</p>
+      <button class="btn ghost" id="qStop">Stop</button>
+    </div></section>`;
+  $("#qStart").onclick=startQibla;
+  $("#qStop").onclick=()=>{stopQibla();slot.querySelector(".qibla").dataset.on="false"};
+}
+async function startQibla(){
+  const card=$(".qibla"),read=$("#qRead"),arrow=$("#qArrow");
+  try{
+    if(typeof DeviceOrientationEvent.requestPermission==="function"&&await DeviceOrientationEvent.requestPermission()!=="granted"){
+      toast("Motion access was declined. The mihrab shows the direction.");return;
+    }
+  }catch(e){toast("Couldn’t access the compass on this phone.");return}
+  stopQibla();
+  card.dataset.on="true";
+  const evt="ondeviceorientationabsolute" in window?"deviceorientationabsolute":"deviceorientation";
+  let got=false;
+  const onTurn=e=>{
+    let h=e.webkitCompassHeading;
+    if(h==null&&e.absolute&&e.alpha!=null)h=360-e.alpha;
+    if(h==null)return;
+    got=true;
+    h=(h+((screen.orientation&&screen.orientation.angle)||0))%360;
+    const turn=((QIBLA-h)%360+360)%360;
+    arrow.style.transform=`rotate(${turn}deg)`;
+    const off=turn>180?turn-360:turn;
+    /* round to 5° so screen readers aren't flooded while turning */
+    const msg=Math.abs(off)<=8?"You’re facing the qibla":off>0?`Turn right ${Math.round(off/5)*5}°`:`Turn left ${Math.round(-off/5)*5}°`;
+    if(read.textContent!==msg)read.textContent=msg;
+  };
+  addEventListener(evt,onTurn);
+  const t=setTimeout(()=>{if(!got){read.textContent="This phone isn’t reporting a compass heading. The mihrab shows the direction."}},3000);
+  qiblaOff=()=>{removeEventListener(evt,onTurn);clearTimeout(t)};
+}
+function stopQibla(){if(qiblaOff){qiblaOff();qiblaOff=null}}
+
 /* ---------- Router ---------- */
 function route(){
-  stopAudio();closeScan();
+  stopAudio();closeScan();stopQibla();
   const h=location.hash.replace("#","");
   const idx=STATIONS.findIndex(s=>s.id===h);
   const mIdx=h.startsWith("more-")?STATIONS.findIndex(s=>"more-"+s.id===h):-1;

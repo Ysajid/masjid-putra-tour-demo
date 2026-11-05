@@ -22,6 +22,10 @@ To print the codes, open `#plaques` from the address you'll publish to; there's 
 
 The camera works only over HTTPS (or `localhost`), which GitHub Pages provides.
 
+## Qibla finder (optional)
+
+On touch devices, the mihrab station offers an opt-in **Try the qibla finder** button. It turns the phone's compass into an arrow pointing toward the Kaaba (292.6° from true north at Masjid Putra). It uses only the motion sensors, never the camera, and asks for permission only when tapped. Desktops and phones without a compass don't see it. Compasses drift near steel and electronics, so the card reminds visitors that the mihrab is the true direction.
+
 ## Run locally
 
 ```sh
