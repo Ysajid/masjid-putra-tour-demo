@@ -31,6 +31,15 @@ Hadith numbering varies between collections and printings. It would help to name
 6. **Mihrab: "From Malaysia, that's roughly west-northwest."** This is correct for Putrajaya (about 292°). Keep it if the station plaque is oriented to match.
 7. **Adhan words.** The table gives the common form, which opens with four takbirs. If Masjid Putra's muezzin uses a variant, match it.
 
+## Guide mode notes
+
+The guide talking points (`GUIDE` in `index.html`) restate the visitor text in shorter form. The suggested answers below are new, though, and need the same review:
+
+- Ablution: "Wudu lasts until something breaks it, such as using the toilet or falling asleep."
+- Hall: "Men and women pray in separate areas, so everyone can bow and prostrate at ease." Check that this is how the mosque prefers to explain it.
+- Rows: "Whoever arrives first, in the men’s and women’s areas."
+- Dress: "Do I have to wear it? Yes, inside the mosque." Confirm this matches Masjid Putra's visitor policy.
+
 ## Still to decide
 
 - Who signs off the text, and how the badge changes once they do.

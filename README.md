@@ -22,6 +22,17 @@ To print the codes, open `#plaques` from the address you'll publish to; there's 
 
 The camera works only over HTTPS (or `localhost`), which GitHub Pages provides.
 
+## Guide mode
+
+For a guide leading a group, the welcome screen has a small **I’m guiding a group** link. Guide mode changes the app around the guide:
+
+- Each station shows **what to share** (short talking points), **what to point out**, **a question to engage the group**, **if they ask** (likely questions with suggested answers), a reminder for the group and a tip for the guide. The full visitor narration is collapsed underneath, and **Background for you** links to the deeper notes.
+- The audio narration and scan button are hidden, because the guide does the talking.
+- **Answers to common questions** gathers the general FAQ and every station's questions on one page.
+- The last screen suggests how to close the tour, and **Reset for the next group** clears the guide's progress. Guide progress is stored separately from visitor progress.
+
+The mode is remembered on the device. A link ending in `?guide` (for example `…/masjid-putra-tour-demo/?guide`) opens guide mode directly, which is handy to send to guides. Guide talking points are in `GUIDE` in the script.
+
 ## Qibla finder (optional)
 
 On touch devices, the mihrab station offers an opt-in **Try the qibla finder** button. It turns the phone's compass into an arrow pointing toward the Kaaba (292.6° from true north at Masjid Putra). It uses only the motion sensors, never the camera, and asks for permission only when tapped. Desktops and phones without a compass don't see it. Compasses drift near steel and electronics, so the card reminds visitors that the mihrab is the true direction.

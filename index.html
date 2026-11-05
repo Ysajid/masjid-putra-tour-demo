@@ -154,6 +154,19 @@ details.where .plan{margin-top:0}
 .qibla[data-on="false"] .live{display:none}
 .qibla[data-on="true"] .start{display:none}
 
+/* Guide mode */
+.pill{font-family:"Alegreya Sans",sans-serif;font-size:12px;font-weight:700;color:var(--lake);border:1px solid var(--lake);border-radius:10px;padding:1px 8px;vertical-align:3px;margin-left:4px}
+.linkbtn{display:block;width:100%;background:none;border:0;padding:6px 0;cursor:pointer;font-size:14px;color:var(--muted);text-decoration:underline;text-align:center}
+.gpoints{padding-left:20px;margin:0}
+.gpoints li{margin:10px 0;max-width:62ch}
+.gpoints li::marker{color:var(--rose)}
+.gcard{margin-top:12px;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface)}
+.gcard b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--lake);margin-bottom:2px}
+.gcard.ask{border-left:4px solid var(--lake)}
+details.where .narr{padding-bottom:14px}
+details.where .narr p:first-child{font-size:19px}
+.guide-intro{text-align:center;margin:12px auto 0}
+
 /* Know more */
 .more .refs{padding-left:20px;margin:8px 0 0}
 .more .refs li{margin:6px 0;color:var(--muted)}
@@ -515,10 +528,100 @@ const FAQ = [
   ["What is Ramadan?","The ninth month of the Islamic calendar, when Muslims fast from dawn to sunset, give more in charity and spend more time in prayer. It ends with Eid al-Fitr, known in Malaysia as Hari Raya Aidilfitri."]
 ];
 
+/* ---------- Guide mode content: talking points for a person leading a group ---------- */
+const GUIDE = {
+dress:{
+  say:["Make it clear the group are guests, not being judged. The robe is about the place, not about them.",
+       "Modesty, haya, applies to men and women alike. The Quran’s instruction to men comes first (24:30), which often surprises visitors.",
+       "Muslims dress for the mosque as if standing before God. Wearing the robe lets visitors share that moment."],
+  show:"The robe rail, and where robes go back at the exit.",
+  ask:"“Are there places in your own culture where you dress differently?” Weddings, courts and places of worship usually come up, which makes the point for you.",
+  faq:[["Do I have to wear it?","Yes, inside the mosque. It’s the same courtesy asked of every visitor."],
+       ["Why do only women cover their hair?","Men have their own rules too: covering from navel to knee and lowering the gaze. The FAQ has a fuller answer."]],
+  care:"Help with headscarves only if asked. Some visitors feel self-conscious, so keep it light."
+},
+ablution:{
+  say:["Before every prayer, Muslims wash in a set order. This is wudu.",
+       "Its first purpose is spiritual: setting aside the rush of the day before standing before God. The Prophet taught that small wrongs are washed away with the water.",
+       "Five times a day, it also builds a lifelong habit of cleanliness. “Purity is half of faith.”"],
+  show:"Walk through the eight steps on screen while pointing at the taps. If someone is washing, let the group watch quietly from the edge.",
+  ask:"“How many times a day do you think someone might do this?” (Up to five.)",
+  faq:[["What if there’s no water?","Islam allows a symbolic dry purification with clean earth, called tayammum (Quran 5:6)."],
+       ["Do you wash again for every prayer?","Not always. Wudu lasts until something breaks it, such as using the toilet or falling asleep."]],
+  care:"If the area is busy before a prayer time, explain from the entrance rather than walking the group in."
+},
+threshold:{
+  say:["This is where you cross from the street into a sacred space.",
+       "The carpet is where people place their foreheads in prayer, so it’s kept clean. It’s like taking shoes off before entering a home.",
+       "Muslims step in with the right foot and ask God to open the doors of His mercy. The Quran tells of Moses removing his sandals before speaking with God (20:12), a story many visitors know from the Bible."],
+  show:"The shoe racks. You can step in with your right foot to show the habit.",
+  ask:"“Who here takes their shoes off at home?” Many visitors will say yes.",
+  faq:[["Can I keep my socks on?","Yes."],
+       ["Is a mosque only for prayer?","No. Like the Prophet’s mosque in Medina, it’s also a place for classes, weddings, community meals and help for families in need."]],
+  care:"From here on, ask the group to keep their voices low."
+},
+hall:{
+  say:["Notice what isn’t here: no pews, no statues, no pictures. Islam teaches that God has no image and no partner.",
+       "No places are reserved for rank or wealth.",
+       "Prayer moves through standing, bowing and prostration. Muslims feel closest to God with the forehead on the ground."],
+  show:"The open carpet and the light. If no one is praying, you can describe the postures, or show them briefly yourself.",
+  ask:"“What do you notice is missing?” Let them answer before you explain.",
+  faq:[["Where do women pray?","Point out the women’s area. Men and women pray in separate areas, so everyone can bow and prostrate at ease."],
+       ["How long is a prayer?","About five to ten minutes."]],
+  care:"If a prayer is about to start, it’s a good moment to pause the tour and let the group watch quietly from the back."
+},
+rows:{
+  say:["The lines in the carpet mark the rows. In congregation, Muslims stand shoulder to shoulder, feet aligned.",
+       "A minister may stand beside a cleaner. Wealth, rank and race count for nothing here (Quran 49:13).",
+       "The first call to prayer was given by Bilal, a freed slave from Ethiopia. The Prophet chose him on purpose."],
+  show:"The lines woven into the carpet.",
+  ask:"“Who do you think might end up standing next to whom at Friday prayer?”",
+  faq:[["Who stands at the front?","Whoever arrives first, in the men’s and women’s areas. The imam leads from the very front."]],
+  care:"The Bilal story usually lands well. Keep it short."
+},
+mihrab:{
+  say:["The niche is the mihrab. It isn’t an altar and holds nothing sacred. It only shows the direction of prayer.",
+       "Every mosque faces the Kaaba in Mecca, so Muslims everywhere pray toward one point. From here that’s roughly west-northwest.",
+       "The stepped pulpit is the minbar. The Friday sermon is given from it, usually in Malay here."],
+  show:"The mihrab and the minbar. If your visitors have phones out, the qibla finder below shows the direction live.",
+  ask:"“Which way do you think Mecca is from here?” Let them point before you tell them.",
+  faq:[["Do Muslims worship the Kaaba?","No. It gives everyone one direction; worship is for God alone. Muslims believe Abraham and Ishmael built it."],
+       ["Didn’t Muslims once pray toward Jerusalem?","Yes, in the early years in Medina, before the change recorded in Quran 2:142–144."]],
+  care:"If the qibla finder is a few degrees off, that’s the phone’s compass, not the mihrab."
+},
+calligraphy:{
+  say:["Instead of pictures, mosques are decorated with words and patterns.",
+       "The calligraphy is verses of the Quran, revealed in Arabic over twenty-three years. The repeating patterns hint at the infinite.",
+       "Al-Ikhlas, four short lines, sums up how Muslims understand God."],
+  show:"The band of calligraphy under the dome.",
+  ask:"If you can, recite Al-Ikhlas aloud. It takes about ten seconds, and visitors often remember it most.",
+  faq:[["Is a translation still the Quran?","Muslims see a translation as an explanation of the meaning. The Quran itself is the Arabic."],
+       ["Do people really memorise all of it?","Yes, millions of people, including children."]],
+  care:""
+},
+adhan:{
+  say:["Five times a day, the call to prayer, the adhan, rises from the minaret.",
+       "It isn’t music or a bell. It’s an invitation in human words, and it sums up Islam: God is greatest, there is no god but God, Muhammad is His messenger, come to prayer, come to success.",
+       "At dawn one more line is added: prayer is better than sleep."],
+  show:"The minaret. Go through the words on screen with the group, line by line.",
+  ask:"If the adhan is called during your tour, stop and listen together. It lasts about two minutes.",
+  faq:[["Who gives the call?","A muezzin. The first was Bilal, chosen for his strong voice."],
+       ["Why is it in Arabic everywhere?","So the call and the prayer are the same for every Muslim, in every country."]],
+  care:"Before you close, ask whether anyone has a question they haven’t asked yet."
+}
+};
+
+
 /* ---------- Storage (guarded) ---------- */
 function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-let visited = new Set(load("mt-visited",[]));
+/* Mode: visitor (default) or guide. "?guide" in the URL opens guide mode directly. */
+if(/[?&]guide\b/.test(location.search)){save("mt-mode","guide");try{history.replaceState(null,"",location.pathname+location.hash)}catch(e){}}
+let guide=load("mt-mode","visitor")==="guide";
+const vKey=()=>guide?"mt-visited-guide":"mt-visited";
+let visited = new Set(load(vKey(),[]));
+function setMode(g){guide=g;save("mt-mode",g?"guide":"visitor");visited=new Set(load(vKey(),[]));updateBar()}
+function updateBar(){$("#barName").innerHTML=MOSQUE.name+(guide?' <span class="pill">Guide</span>':"")}
 
 /* ---------- Helpers ---------- */
 const app=document.getElementById("app"), bar=document.getElementById("bar");
@@ -578,64 +681,99 @@ function vWelcome(){
   app.innerHTML=`<section class="welcome">
     ${heroIll()}
     <h1>${MOSQUE.name}</h1>
+    ${guide?`
+    <p class="guide-intro"><span class="pill">Guide mode</span></p>
+    <p class="lede">Talking points, things to point out and answers to common questions at every station. Your visitors don’t need a phone.</p>
+    <div class="strip" aria-hidden="true">${ILL.ablution()}${ILL.hall()}${ILL.calligraphy()}</div>
+    <p class="note">Eight stations, about 40 minutes with a group. Tap each station as you arrive.</p>
+    <a class="btn" href="#tour" style="margin-top:22px">Open the tour plan</a>
+    <p class="note">Remind visitors that robes and headscarves are free to borrow at the entrance.</p>`:`
     <p class="lede">${MOSQUE.intro}</p>
     <div class="strip" aria-hidden="true">${ILL.ablution()}${ILL.hall()}${ILL.calligraphy()}</div>
     <p class="note">Eight stations, about 40 minutes. At each one, listen to what happens here and why it matters to Muslims.</p>
     <div class="langs" role="group" aria-label="Language">${langs.map(([c,n])=>`<button class="lang" data-l="${c}" aria-pressed="${c==="en"}">${n}</button>`).join("")}</div>
     <a class="btn" href="#tour">Start the tour</a>
-    <p class="note">Robes and headscarves are free to borrow at the entrance.</p>
+    <p class="note">Robes and headscarves are free to borrow at the entrance.</p>`}
     <span class="badge">Prototype. Content pending scholar review</span>
-    <a class="stafflink" href="#plaques">Staff: print station QR plaques</a>
+    <button class="linkbtn" id="modeBtn" style="margin-top:14px">${guide?"Switch to visitor mode":"I’m guiding a group"}</button>
+    <a class="stafflink" href="#plaques" style="margin-top:2px">Staff: print station QR plaques</a>
   </section>`;
   app.querySelectorAll(".lang").forEach(b=>b.onclick=()=>{if(b.dataset.l!=="en")toast(`${b.textContent} narration arrives in the pilot. Showing English for now.`)});
+  $("#modeBtn").onclick=()=>{setMode(!guide);vWelcome();$("#modeBtn").focus();toast(guide?"Guide mode: talking points for leading a group.":"Visitor mode.")};
 }
 
 function vTour(){
   setBack("#","Back to welcome");
   const next=STATIONS.find(s=>!visited.has(s.id)), all=!next;
+  const sub=guide
+    ?(all?"You’ve covered every station with this group.":`${visited.size} of ${STATIONS.length} stations covered with this group. Tap a station when you arrive.`)
+    :(all?"You’ve seen every station.":`${visited.size} of ${STATIONS.length} stations visited. Follow the dotted path, or tap a station.`);
+  const main=all
+    ?`<a class="btn" href="#finish">${guide?"Close the tour":"Finish the tour"}</a>`
+    :guide?`<a class="btn" href="#${next.id}">Next: ${next.title}</a>`:`<button class="btn" id="scanBtn">${ICON.scan}Scan station code</button>`;
   app.innerHTML=`<section class="map">
-    <h1>Your tour</h1>
-    <p class="sub">${all?"You’ve seen every station.":`${visited.size} of ${STATIONS.length} stations visited. Follow the dotted path, or tap a station.`}</p>
+    <h1>${guide?"Tour plan":"Your tour"}</h1>
+    <p class="sub">${sub}</p>
     ${plan()}
     <p class="caption">Illustrative layout. The pilot uses the mosque’s real floor plan.</p>
     <div class="stack">
-      ${all?`<a class="btn" href="#finish">Finish the tour</a>`:`<button class="btn" id="scanBtn">${ICON.scan}Scan station code</button>`}
-      <a class="btn ghost" href="#questions">Questions visitors ask</a>
+      ${main}
+      <a class="btn ghost" href="#questions">${guide?"Answers to common questions":"Questions visitors ask"}</a>
     </div>
     <ol class="list">${STATIONS.map((s,i)=>`<li><a href="#${s.id}">
       <span class="thumb" aria-hidden="true">${ILL[s.id]()}</span>
       <span class="t"><b>${i+1}. ${s.title}</b><span>${s.place}</span></span>
-      ${visited.has(s.id)?'<span class="chk">Visited</span>':""}</a></li>`).join("")}</ol>
+      ${visited.has(s.id)?`<span class="chk">${guide?"Covered":"Visited"}</span>`:""}</a></li>`).join("")}</ol>
   </section>`;
   const sb=$("#scanBtn");if(sb)sb.onclick=()=>openScan(next.id);
 }
 
+function sourcesHtml(st,heading){
+  return st.sources.length?`<h2 class="sec">${heading}</h2>${st.sources.map(s=>`<div class="src"><p class="en">${s.en}</p><p class="ref">${s.ref}</p>${s.ctx?`<p class="ctx">${s.ctx}</p>`:""}</div>`).join("")}`:"";
+}
+function faqHtml(list){return `<div class="faq">${list.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>`}
+
 function vStation(i){
-  const st=STATIONS[i];
-  visited.add(st.id);save("mt-visited",[...visited]);
-  setBack("#tour","Back to tour map");
+  const st=STATIONS[i], g=GUIDE[st.id];
+  visited.add(st.id);save(vKey(),[...visited]);
+  setBack("#tour",guide?"Back to tour plan":"Back to tour map");
   const prev=STATIONS[i-1], next=STATIONS[i+1];
   let extra="";
   if(st.steps) extra=`<ol class="steps" aria-label="Order of washing">${st.steps.map((s,k)=>`<li><i>${k+1}</i>${s}</li>`).join("")}</ol>`;
   if(st.id==="mihrab") extra=`<div id="qiblaSlot"></div>`;
   if(st.adhan) extra=`<h2 class="sec">The words of the adhan</h2><div class="adhan">${st.adhan.map(([tr,en,x])=>`<div><span class="x">${x}</span><span class="tr">${tr}</span><span class="en">${en}</span></div>`).join("")}</div>`;
+  const morelink=`<a class="morelink" href="#more-${st.id}"><span><b>${guide?"Background for you":"Know more"}</b><span>${st.more.title}</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>`;
+  const body=guide?`
+    <h2 class="sec">Share with the group</h2>
+    <ul class="gpoints">${g.say.map(p=>`<li>${p}</li>`).join("")}</ul>
+    <div class="gcard"><b>Point out</b>${g.show}</div>
+    <div class="gcard ask"><b>Engage the group</b>${g.ask}</div>
+    ${extra}
+    <h2 class="sec">If they ask</h2>
+    ${faqHtml(g.faq)}
+    ${sourcesHtml(st,"Quote if it helps")}
+    <aside class="tip"><b>Remind the group</b>${st.tip}</aside>
+    ${g.care?`<div class="gcard"><b>Tip for you</b>${g.care}</div>`:""}
+    <details class="where"><summary>Full visitor narration</summary><div class="narr">${st.narr.map(p=>`<p>${p}</p>`).join("")}</div></details>
+    ${morelink}`:`
+    <button class="listen" aria-pressed="false"><span class="ic">${ICON.play}</span><span><b>Listen to this station</b><span>${st.mins} narration</span></span></button>
+    <div class="narr">${st.narr.map(p=>`<p>${p}</p>`).join("")}</div>
+    ${extra}
+    ${sourcesHtml(st,"From the sources")}
+    ${morelink}
+    <aside class="tip"><b>While you’re here</b>${st.tip}</aside>`;
   app.innerHTML=`<article>
     ${ILL[st.id]()}
     <p class="st-meta">Station ${i+1} of ${STATIONS.length}, ${st.place}</p>
     <h1 class="st-title">${st.title}</h1>
     <details class="where"><summary>Show on the mosque map</summary>${plan(st.id,false)}</details>
-    <button class="listen" aria-pressed="false"><span class="ic">${ICON.play}</span><span><b>Listen to this station</b><span>${st.mins} narration</span></span></button>
-    <div class="narr">${st.narr.map(p=>`<p>${p}</p>`).join("")}</div>
-    ${extra}
-    ${st.sources.length?`<h2 class="sec">From the sources</h2>${st.sources.map(s=>`<div class="src"><p class="en">${s.en}</p><p class="ref">${s.ref}</p>${s.ctx?`<p class="ctx">${s.ctx}</p>`:""}</div>`).join("")}`:""}
-    <a class="morelink" href="#more-${st.id}"><span><b>Know more</b><span>${st.more.title}</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
-    <aside class="tip"><b>While you’re here</b>${st.tip}</aside>
+    ${body}
     <nav class="stepper" aria-label="Stations">
-      ${prev?`<a class="btn ghost" href="#${prev.id}" aria-label="Previous station">Back</a>`:`<a class="btn ghost" href="#tour">Map</a>`}
-      ${next?`<a class="btn" href="#${next.id}">Next: ${next.title}</a>`:`<a class="btn" href="#finish">Finish the tour</a>`}
+      ${prev?`<a class="btn ghost" href="#${prev.id}" aria-label="Previous station">Back</a>`:`<a class="btn ghost" href="#tour">${guide?"Plan":"Map"}</a>`}
+      ${next?`<a class="btn" href="#${next.id}">Next: ${next.title}</a>`:`<a class="btn" href="#finish">${guide?"Close the tour":"Finish the tour"}</a>`}
     </nav>
   </article>`;
-  const lb=$(".listen");lb.onclick=()=>toggleAudio(st,lb);
+  const lb=$(".listen");if(lb)lb.onclick=()=>toggleAudio(st,lb);
   if(st.id==="mihrab"&&qiblaSupported())mountQibla();
 }
 
@@ -644,20 +782,30 @@ function vMore(i){
   setBack("#"+st.id,"Back to station");
   app.innerHTML=`<article class="more">
     ${ILL[st.id]()}
-    <p class="st-meta">Know more: ${st.title}</p>
+    <p class="st-meta">${guide?"Background":"Know more"}: ${st.title}</p>
     <h1 class="st-title">${m.title}</h1>
     <div class="narr">${m.p.map(p=>`<p>${p}</p>`).join("")}</div>
     <h2 class="sec">Read further</h2>
     <ul class="refs">${m.refs.map(r=>`<li>${r}</li>`).join("")}</ul>
     <div class="stack" style="margin-top:28px">
       <a class="btn" href="#${st.id}">Back to the station</a>
-      <a class="btn ghost" href="#tour">Tour map</a>
+      <a class="btn ghost" href="#tour">${guide?"Tour plan":"Tour map"}</a>
     </div>
   </article>`;
 }
 
 function vQuestions(){
-  setBack("#tour","Back to tour map");
+  setBack("#tour",guide?"Back to tour plan":"Back to tour map");
+  if(guide){
+    app.innerHTML=`<section class="faq">
+      <h1>Answering common questions</h1>
+      <p class="sub" style="color:var(--muted);margin-top:8px">Suggested answers. Put them in your own words, and it’s fine to say you’ll find out.</p>
+      ${FAQ.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}
+      <h2 class="sec">By station</h2>
+      ${STATIONS.map((s,i)=>`<h3 style="font-size:18px;margin:22px 0 0">${i+1}. ${s.title}</h3>${GUIDE[s.id].faq.map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join("")}`).join("")}
+    </section>`;
+    return;
+  }
   const asked=load("mt-asked",null);
   app.innerHTML=`<section class="faq">
     <h1>Questions visitors ask</h1>
@@ -674,7 +822,27 @@ function sentMsg(){return `<div class="sent"><b>Sent.</b> A guide will meet you 
 document.addEventListener("click",e=>{if(e.target.id==="askAgain"){e.preventDefault();save("mt-asked",null);vQuestions()}});
 
 function vFinish(){
-  setBack("#tour","Back to tour map");
+  setBack("#tour",guide?"Back to tour plan":"Back to tour map");
+  if(guide){
+    app.innerHTML=`<section class="finish">
+      ${heroIll()}
+      <h1>Closing the tour</h1>
+      <p class="lede">A suggested close, then reset for your next group.</p>
+      <ul class="gpoints" style="margin-top:22px">
+        <li>Thank the group for coming, and tell them they’re welcome back any time.</li>
+        <li>Invite last questions. If you don’t know an answer, it’s fine to say you’ll find out.</li>
+        <li>Remind them to return robes and headscarves at the exit.</li>
+        <li>Mention that the station plaques have QR codes, so they can read more on their own phones.</li>
+      </ul>
+      <div class="src" style="margin-top:22px"><p class="en">“There is no compulsion in religion.”</p><p class="ref">Quran 2:256</p><p class="ctx">A good line to end on.</p></div>
+      <div class="stack" style="margin-top:28px">
+        <button class="btn" id="restart">Reset for the next group</button>
+        <a class="btn ghost" href="#questions">Answers to common questions</a>
+      </div>
+    </section>`;
+    $("#restart").onclick=()=>{visited=new Set();save(vKey(),[]);toast("Ready for the next group.");location.hash="tour"};
+    return;
+  }
   const fb=load("mt-feedback",{});
   app.innerHTML=`<section class="finish">
     ${heroIll()}
@@ -692,7 +860,7 @@ function vFinish(){
   </section>`;
   app.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{fb.r=+b.dataset.r;save("mt-feedback",fb);app.querySelectorAll("[data-r]").forEach(x=>x.setAttribute("aria-pressed",x===b));toast("Thanks. Your rating helps the mosque improve its tours.")});
   app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{fb.c=b.dataset.c;save("mt-feedback",fb);app.querySelectorAll("[data-c]").forEach(x=>x.setAttribute("aria-pressed",x===b))});
-  $("#restart").onclick=()=>{visited=new Set();save("mt-visited",[]);location.hash="tour"};
+  $("#restart").onclick=()=>{visited=new Set();save(vKey(),[]);location.hash="tour"};
 }
 
 /* ---------- Scan: live camera where possible, simulated otherwise ---------- */
@@ -882,7 +1050,7 @@ function route(){
   routed=true;
 }
 let routed=false;
-$("#barName").textContent=MOSQUE.name;
+updateBar();
 window.addEventListener("hashchange",route);
 window.addEventListener("pagehide",()=>{stopAudio();closeScan()});
 route();
